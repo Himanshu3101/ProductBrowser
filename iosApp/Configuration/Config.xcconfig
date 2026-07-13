@@ -1,0 +1,7 @@
+TEAM_ID=
+
+PRODUCT_NAME=Product Browser
+PRODUCT_BUNDLE_IDENTIFIER=org.himanshu.productbrowser.ProductBrowser$(TEAM_ID)
+
+CURRENT_PROJECT_VERSION=1
+MARKETING_VERSION=1.0
