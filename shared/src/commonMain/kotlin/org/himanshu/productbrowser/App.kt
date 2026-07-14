@@ -4,6 +4,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
 import org.himanshu.productbrowser.di.AppModule
+import org.himanshu.productbrowser.presentation.navigation.AppNavigation
 import org.himanshu.productbrowser.presentation.productlist.ProductListScreen
 
 @Composable
@@ -14,9 +15,6 @@ fun App() {
 
     MaterialTheme {
 
-        ProductListScreen(
-            viewModel = viewModel,
-            onProductClicked = {}
-        )
+        AppNavigation()
     }
 }

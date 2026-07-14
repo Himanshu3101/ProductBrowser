@@ -31,10 +31,7 @@ class ProductListViewModel(
     }
 
     private fun searchProduct(query: String) {
-        if(query.isBlank()){
-            fetchProducts()
-            return
-        }
+
 
         launch {
             updateState {
@@ -45,13 +42,17 @@ class ProductListViewModel(
             }
 
             runCatching {
+                if(query.isBlank()){
+                    getProductsUseCase()
+                }
                 searchProductsUseCase(query)
             }.onSuccess { products ->
 
                 updateState {
                     copy(
                         isLoading = false,
-                        products = products
+                        products = products,
+                        error = null
                     )
                 }
             }.onFailure { exception ->

@@ -7,6 +7,6 @@ class GetProductUseCase (
     private val repository: ProductRepository
 ){
     suspend operator fun invoke(id: Int): Product{
-        return repository.getProducts(id)
+        return repository.getProduct(id)
     }
 }

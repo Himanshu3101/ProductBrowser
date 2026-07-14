@@ -10,7 +10,7 @@ class ProductRepositoryImpl (private val api: ProductApi): ProductRepository {
         return api.getProduct().products.map { it.toDomain() }
     }
 
-    override suspend fun getProducts(id: Int): Product {
+    override suspend fun getProduct(id: Int): Product {
         return api.getProduct(id).toDomain()
     }
 

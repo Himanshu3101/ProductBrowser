@@ -8,6 +8,7 @@ import org.himanshu.productbrowser.domain.repository.ProductRepository
 import org.himanshu.productbrowser.domain.usecase.GetProductUseCase
 import org.himanshu.productbrowser.domain.usecase.GetProductsUseCase
 import org.himanshu.productbrowser.domain.usecase.SearchProductsUseCase
+import org.himanshu.productbrowser.presentation.productdetail.ProductDetailViewModel
 import org.himanshu.productbrowser.presentation.productlist.ProductListViewModel
 
 //It will create and expose:
@@ -35,6 +36,12 @@ object AppModule{
         return ProductListViewModel(
             getProductsUseCase = getProductsUseCase,
             searchProductsUseCase = searchProductsUseCase
+        )
+    }
+
+    fun provideProductDetailViewModel() : ProductDetailViewModel{
+        return ProductDetailViewModel(
+            getProductUseCase = getProductUseCase
         )
     }
 

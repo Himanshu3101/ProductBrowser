@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.himanshu.productbrowser.presentation.components.ProductCard
@@ -21,12 +22,12 @@ import org.himanshu.productbrowser.presentation.components.ProductCard
 fun ProductListScreen(
     viewModel: ProductListViewModel,
     onProductClicked: (Int) -> Unit
-){
+) {
     val state by viewModel.state.collectAsState()
 
     Column(
         modifier = Modifier.fillMaxSize()
-    ){
+    ) {
 
         OutlinedTextField(
             value = state.searchQuery,
@@ -43,17 +44,33 @@ fun ProductListScreen(
             }
         )
 
-        if(state.isLoading){
-            Box(modifier = Modifier.fillMaxSize()){
-                CircularProgressIndicator()
+        when {
+            state.isLoading -> {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator()
+                }
             }
-        }else{
-            LazyColumn {
-                items(state.products){ product ->
-                    ProductCard(
-                        product = product,
-                        onClick = {onProductClicked(product.id)}
-                    )
+
+            state.error != null -> {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(state.error!!)
+                }
+            }
+
+            else -> {
+                LazyColumn {
+                    items(state.products) { product ->
+                        ProductCard(
+                            product = product,
+                            onClick = { onProductClicked(product.id) }
+                        )
+                    }
                 }
             }
         }
