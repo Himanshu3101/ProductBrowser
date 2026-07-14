@@ -2,6 +2,8 @@
 
 A cross-platform Product Browser application built using **Kotlin Multiplatform (KMP)** and **Compose Multiplatform**. The application consumes product data from the DummyJSON API and demonstrates a clean, scalable architecture with shared business logic and UI for Android and iOS.
 
+The project is configured for both Android and iOS using Kotlin Multiplatform. The application was developed and tested on Android. Building and running the iOS target requires Xcode on macOS.
+
 ---
 
 ## 📌 Business Requirements
