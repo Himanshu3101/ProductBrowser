@@ -17,7 +17,52 @@ class ProductListViewModel(
     val state: StateFlow<ProductListState> = _state.asStateFlow()
 
     init {
-        fetchProducts()
+        onEvent(ProductListEvent.LoadProducts)
+    }
+
+    fun onEvent(event: ProductListEvent){
+        when(event){
+            ProductListEvent.LoadProducts -> fetchProducts()
+            is ProductListEvent.Search -> searchProduct(event.query)
+            is ProductListEvent.ProductClicked -> {
+                //Navigation handled
+            }
+        }
+    }
+
+    private fun searchProduct(query: String) {
+        if(query.isBlank()){
+            fetchProducts()
+            return
+        }
+
+        launch {
+            updateState {
+                copy(
+                    isLoading = true,
+                    searchQuery = query
+                )
+            }
+
+            runCatching {
+                searchProductsUseCase(query)
+            }.onSuccess { products ->
+
+                updateState {
+                    copy(
+                        isLoading = false,
+                        products = products
+                    )
+                }
+            }.onFailure { exception ->
+                updateState {
+                    copy(
+                        isLoading = false,
+                        error = exception.message ?: "Something went wrong..,"
+                    )
+                }
+            }
+        }
     }
 
     private fun fetchProducts() {

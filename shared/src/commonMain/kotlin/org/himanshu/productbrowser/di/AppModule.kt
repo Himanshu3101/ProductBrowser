@@ -8,6 +8,7 @@ import org.himanshu.productbrowser.domain.repository.ProductRepository
 import org.himanshu.productbrowser.domain.usecase.GetProductUseCase
 import org.himanshu.productbrowser.domain.usecase.GetProductsUseCase
 import org.himanshu.productbrowser.domain.usecase.SearchProductsUseCase
+import org.himanshu.productbrowser.presentation.productlist.ProductListViewModel
 
 //It will create and expose:
 //HttpClient
@@ -24,11 +25,18 @@ object AppModule{
 
     private val repository: ProductRepository = ProductRepositoryImpl(productApi)
 
-    val getProductsUseCase = GetProductsUseCase(repository)
+    private val getProductsUseCase = GetProductsUseCase(repository)
 
-    val getProductUseCase = GetProductUseCase(repository)
+    private val getProductUseCase = GetProductUseCase(repository)
 
-    val searchProductsUseCase = SearchProductsUseCase(repository)
+    private val searchProductsUseCase = SearchProductsUseCase(repository)
+
+    fun provideProductListViewModel(): ProductListViewModel{
+        return ProductListViewModel(
+            getProductsUseCase = getProductsUseCase,
+            searchProductsUseCase = searchProductsUseCase
+        )
+    }
 
 
 }
