@@ -20,12 +20,14 @@ The application provides the following features:
 
 ## 📸 Screenshots
 
-| Product List | Product Detail | Search Screen |
-|--------------|----------------|
-|--------------|----------------|
-| ![](screenshots/product_list.png) | ![](screenshots/product_detail.png) | ![](screenshots/search.png) |
+Product List |
+![](screenshots/product_list.png)
 
+Product Detail |
+![](screenshots/product_detail.png)
 
+Search Screen |
+![](screenshots/search.png)
 
 ---
 
